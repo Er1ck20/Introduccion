@@ -1,0 +1,2 @@
+# Control de version.
+django == 4.1.4
