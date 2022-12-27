@@ -1,0 +1,11 @@
+<form method = 'Post'>
+
+{% comment %}  Siempre que se haga un formulario debemos de agregar un token csrf_token
+{% endcomment %}
+{% csrf_token %}
+Title: {{form.title}}
+<br>
+Content: {{form.content}}
+<br>
+<button type = 'submit'>Enviar</button>
+</form>

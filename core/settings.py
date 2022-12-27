@@ -1,30 +1,39 @@
 from pathlib import Path
+import os
+import environ 
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+env = environ.Env() # Nos permite crear las variables de entorno.
+
+environ.Env.read_env() # Nos permitira leer dichas variables.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Gracias e environ podemos proteger estas variables.
+SECRET_KEY = os.environ.get('SECRET_KEY')
+DEBUG = os.environ.get('DEBUG')
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-qvfr+9is6@v35)s%2_k2q8rxs#usr!1)ytcj&vux+0n(z52-$c'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+# Usamos * para trabajar con todos los host
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
-
+# Aqui se agregaran las app que se iran crenado.
 INSTALLED_APPS = [
+
+    # App Preinstaladas
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    'core',
+
+    # Mis APP
+    'blog',
+
+    
 ]
 
 MIDDLEWARE = [
@@ -39,10 +48,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'core.urls'
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -58,9 +68,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'core.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
+# Base de datos
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',

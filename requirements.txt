@@ -1,2 +1,3 @@
 # Control de version.
 django == 4.1.4
+django-environ == 0.9.0
